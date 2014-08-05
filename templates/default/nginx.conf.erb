@@ -8,6 +8,10 @@ worker_cpu_affinity <%= node['openresty']['worker_cpu_affinity'] %>;
 worker_rlimit_nofile <%= node['openresty']['worker_rlimit_nofile'] %>;
 <% end -%>
 
+<% node['openresty']['env_vars'].each do |var, value| -%>
+env <%= var %><%= "=#{value}" if value != nil %>;
+<% end -%>
+
 error_log  <%= node['openresty']['log_dir'] %>/error.log;
 pid        <%= node['openresty']['pid'] %>;
 
